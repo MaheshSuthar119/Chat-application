@@ -7,12 +7,18 @@ import {
   Route,
 } from "react-router-dom";
 import Protected from '../Protected/Protected';
+import { ToastContainer } from 'react-toastify';
 
 function Home() {
   return (
     <div>
-      <Register/>
-      <Login/> 
+      <Routes> 
+          <Route exact path="/" element={<Register/>} /> 
+          <Route path="/login" element={<Login/>} />  
+      </Routes> 
+      <ToastContainer />
+      {/* <Register/> */}
+      {/* <Login/>  */}
          
     </div>
   )

@@ -8,8 +8,8 @@ import {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-     {/* <Router > */}
+     <Router >
       <App />
-    {/* </Router> */}
+    </Router>
   </React.StrictMode>,
 )
