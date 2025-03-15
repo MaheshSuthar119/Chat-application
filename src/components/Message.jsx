@@ -1,21 +1,37 @@
-import React from 'react'
-import styles from './Message.module.css'
-function Message() {
+import React, { useContext, useEffect, useRef } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
+import { format } from "date-fns";
+
+const Message = ({ message }) => {
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
+  
+  const formattedTime = message.date
+    ? format(message.date.toDate(), "MMM d, yyyy h:mm a") // e.g., "Mar 13, 2025 10:30 AM"
+    : "Sending..."; 
+
   return (
-    <div className={`${styles.message} ${styles.owner}`}>
-      <div className={styles.messageInfo}>
-        <img
-         src='https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.webp?b=1&s=170667a&w=0&k=20&c=YQ_j83pg9fB-HWOd1Qur3_kBmG_ot_hZty8pvoFkr6A='
-         alt=''
-        />
-        <span>just now</span>
+    <div
+      ref={ref}
+      className={`message ${message.senderId === currentUser.uid && "owner"}`}
+    >
+      <div className="messageInfo">
+        <span>{formattedTime}</span>
       </div>
-      <div className={`${styles.messageContent} ${styles.messageContent1}`}>
-        <p>hello</p>
-        <img src="https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.webp?b=1&s=170667a&w=0&k=20&c=YQ_j83pg9fB-HWOd1Qur3_kBmG_ot_hZty8pvoFkr6A=" alt="" />
+      <div className="messageContent">
+        <p>{message.text}</p>
+        {/* {message.img && <img src={message.img} alt="" />} */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;
+

@@ -1,16 +1,16 @@
-import React from 'react'
-import styles from './Sidebar.module.css'
-import Navbar from './Navbar'
-import Search from './Search'
-import Chats from './Chats'
-function Sidebar() {
-  return (
-    <div className={styles.sidebar}>
-        <Navbar/>
-        <Search/>
-        <Chats/>
-    </div>
-  )
-}
+import React from "react";
+import Navbar from "./Navbar"
+import Search from "./Search"
+import Chats from "./Chats"
 
-export default Sidebar
+const Sidebar = () => {
+  return (
+    <div className="sidebar">
+      <Navbar />
+      <Search/>
+      <Chats/>
+    </div>
+  );
+};
+
+export default Sidebar;
